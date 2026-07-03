@@ -1,4 +1,4 @@
-!pip install torch torchvision transformers
+#!pip install torch torchvision transformers
 import os
 import torch
 from transformers import AutoModel
