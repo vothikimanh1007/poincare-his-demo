@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poincaré Multimodal Fusion - HIS Demo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- React & ReactDOM (Standalone CDN) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel (To compile JSX in the browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        // --- PROCEDURAL DATASET GENERATOR (100 PATIENTS) ---
+        const generatePatients = (count) => {
+            const pathologies = ["Atelectasis", "Cardiomegaly", "Effusion", "Infiltration", "Mass", "Nodule", "Pneumonia", "Pneumothorax", "Consolidation", "Edema", "Emphysema", "Fibrosis", "Pleural", "Hernia"];
+            const firstNames = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng"];
+            const midNames = ["Văn", "Thị", "Hoàng", "Minh", "Thanh", "Ngọc", "Hữu", "Đức", "Gia", "Bảo"];
+            const lastNames = ["Anh", "Bình", "Châu", "Dũng", "Giang", "Hải", "Linh", "Nam", "Phong", "Trang"];
+
+            return Array.from({length: count}, (_, i) => {
+                const isNormal = Math.random() > 0.4; // 60% Normal cases
+                const target = isNormal ? "Normal" : pathologies[Math.floor(Math.random() * pathologies.length)];
+                
+                // Severity logic: Normal is < 0.3 (near origin), Diseases are > 0.5 (near boundary)
+                const severity = isNormal ? (Math.random() * 0.3) : (0.5 + Math.random() * 0.48);
+                
+                // Procedural 3D coordinates on the Poincare ball surface based on severity radius
+                const angle = Math.random() * Math.PI * 2;
+                const zAngle = Math.random() * Math.PI;
+                const r = severity; 
+                
+                const x = (r * Math.sin(zAngle) * Math.cos(angle)).toFixed(3);
+                const y = (r * Math.sin(zAngle) * Math.sin(angle)).toFixed(3);
+                const z = (r * Math.cos(zAngle)).toFixed(3);
+
+                const name = `${firstNames[Math.floor(Math.random()*10)]} ${midNames[Math.floor(Math.random()*10)]} ${lastNames[Math.floor(Math.random()*10)]}`;
+                
+                const textProfiles = {
+                    "Normal": ["Khám sức khỏe định kỳ. Thể trạng bình thường, không ho, không sốt.", "Bệnh nhân hoàn toàn khỏe mạnh. Phổi trong, không có rale.", "Tái khám sau phẫu thuật mổ ruột thừa. Nhịp thở đều, âm phế bào rõ."],
+                    "Mass": ["Bệnh nhân ho ra máu lượng ít, sụt cân 3kg trong 1 tháng. Có tiền sử hút thuốc.", "Đau tức ngực kéo dài. X-quang tuyến dưới nghi ngờ có khối mờ ở thùy trên phổi phải."],
+                    "Infiltration": ["Sốt cao 39 độ, ho có đờm xanh. Bạch cầu tăng cao.", "Khó thở nhẹ, có rale nổ rải rác ở hai đáy phổi."],
+                    "Effusion": ["Đau ngực dữ dội khi hít sâu, khó thở khi nằm.", "Siêu âm màng phổi có dịch lượng vừa. Cần chọc hút sinh thiết."]
+                };
+
+                let textOptions = textProfiles[target] || [`Bệnh nhân có triệu chứng bất thường liên quan đến ${target}. Cần theo dõi thêm và kết hợp chẩn đoán hình ảnh.`];
+                let text = textOptions[Math.floor(Math.random() * textOptions.length)];
+
+                return {
+                    id: `PT_${(1000 + i).toString()}`,
+                    name: name,
+                    age: Math.floor(Math.random() * 65) + 20,
+                    gender: Math.random() > 0.5 ? "Nam" : "Nữ",
+                    text: text,
+                    target: target,
+                    severity: severity,
+                    x: x, y: y, z: z
+                };
+            });
+        };
+
+        // --- MAIN APP COMPONENT ---
+        function App() {
+            const [activeTab, setActiveTab] = useState('clinical');
+            const [selectedPatient, setSelectedPatient] = useState(null);
+            const [fusionState, setFusionState] = useState('idle');
+            
+            // Memoize the 100 patients so they don't regenerate on every render
+            const dataset = useMemo(() => generatePatients(100), []);
+            
+            // Filter states for the Research tab
+            const [searchTerm, setSearchTerm] = useState('');
+
+            const handleSelectPatient = (pt) => {
+                setSelectedPatient(pt);
+                setFusionState('processing');
+                setTimeout(() => setFusionState('complete'), 1500);
+            };
+
+            const NavButton = ({ id, icon, label }) => (
+                <button
+                    onClick={() => setActiveTab(id)}
+                    className={`flex items-center space-x-2 px-4 py-3 transition-colors ${
+                        activeTab === id 
+                        ? 'bg-white text-blue-700 border-t-2 border-l border-r border-blue-600 font-bold rounded-t-lg' 
+                        : 'bg-transparent text-slate-300 hover:text-white'
+                    }`}
+                >
+                    <i className={`fa-solid ${icon}`}></i>
+                    <span className="text-sm">{label}</span>
+                </button>
+            );
+
+            const filteredDataset = dataset.filter(pt => 
+                pt.id.includes(searchTerm) || pt.target.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Header */}
+                    <header className="bg-slate-900 text-white shadow-lg border-b-4 border-blue-600">
+                        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+                            <div className="flex items-center space-x-4">
+                                <i className="fa-solid fa-network-wired text-3xl text-blue-400"></i>
+                                <div>
+                                    <h1 className="text-2xl font-bold tracking-tight">Poincaré Multimodal Fusion</h1>
+                                    <p className="text-xs text-slate-400 font-mono">Hospital Information System (HIS) Deployment Module</p>
+                                </div>
+                            </div>
+                            <div className="hidden md:flex space-x-3 text-sm">
+                                <span className="bg-slate-800 px-4 py-2 rounded border border-slate-700 text-emerald-400">
+                                    <i className="fa-solid fa-server mr-2"></i> Hệ thống đang chạy (N = 100 Bệnh nhân)
+                                </span>
+                            </div>
+                        </div>
+                        
+                        {/* Tab Navigation embedded in Header */}
+                        <div className="max-w-7xl mx-auto px-6 flex space-x-2 mt-2">
+                            <NavButton id="clinical" icon="fa-stethoscope" label="HIS Triage (Bác sĩ)" />
+                            <NavButton id="research" icon="fa-database" label="Manifold Explorer (Nghiên cứu)" />
+                            <NavButton id="patient" icon="fa-heart-pulse" label="Kết quả Bệnh nhân" />
+                        </div>
+                    </header>
+
+                    {/* Main Content Area */}
+                    <main className="flex-grow flex flex-col max-w-7xl w-full mx-auto p-6">
+                        
+                        {/* --- TAB: CLINICAL VIEW (HIS) --- */}
+                        {activeTab === 'clinical' && (
+                            <div className="grid grid-cols-12 gap-6 animate-[fadeIn_0.5s_ease-out]">
+                                {/* Triage Queue */}
+                                <div className="col-span-12 lg:col-span-4 bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[75vh]">
+                                    <h2 className="text-lg font-bold text-slate-700 mb-4 flex items-center">
+                                        <i className="fa-solid fa-list-check w-5 h-5 mr-2 text-blue-600"></i> Hàng đợi HIS
+                                    </h2>
+                                    <div className="overflow-y-auto pr-2 space-y-2 flex-grow">
+                                        {dataset.slice(0, 50).map(pt => ( // Display top 50 for triage
+                                            <div key={pt.id} onClick={() => handleSelectPatient(pt)} 
+                                                className={`p-3 rounded-lg cursor-pointer border transition-all ${selectedPatient?.id === pt.id ? 'bg-blue-50 border-blue-400 shadow-md' : 'bg-white border-slate-100 hover:bg-slate-50'}`}>
+                                                <div className="flex justify-between items-center">
+                                                    <div className="font-semibold text-slate-800 flex items-center">
+                                                        {pt.id}
+                                                    </div>
+                                                    {pt.severity > 0.5 ? 
+                                                        <i className="fa-solid fa-triangle-exclamation text-red-500" title="Cần lưu ý"></i> : 
+                                                        <i className="fa-solid fa-check-circle text-emerald-500"></i>
+                                                    }
+                                                </div>
+                                                <div className="text-xs text-slate-500 mt-1">{pt.name} | {pt.age}t | {pt.gender}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="text-center text-xs text-slate-400 mt-3 pt-3 border-t">Hiển thị 50/100 bệnh nhân</div>
+                                </div>
+
+                                {/* Analysis Dashboard */}
+                                <div className="col-span-12 lg:col-span-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                                    {selectedPatient ? (
+                                        <div className="space-y-6">
+                                            <div className="flex items-center justify-between border-b pb-4">
+                                                <h2 className="text-xl font-bold text-slate-800">Hỗ Trợ Chẩn Đoán AI (DSS)</h2>
+                                                <span className="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded font-mono font-bold border border-emerald-200">
+                                                    AUROC: 0.8967
+                                                </span>
+                                            </div>
+
+                                            {fusionState === 'processing' ? (
+                                                <div className="py-24 flex flex-col items-center justify-center space-y-4">
+                                                    <i className="fa-solid fa-circle-notch fa-spin text-5xl text-blue-600"></i>
+                                                    <p className="text-slate-500 font-mono text-sm">Đang chiếu đa phương thức vào không gian Hyperbolic...</p>
+                                                </div>
+                                            ) : (
+                                                <div className="grid grid-cols-2 gap-6">
+                                                    {/* Left: Input Modalities */}
+                                                    <div className="space-y-4">
+                                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                                            <h3 className="font-bold text-slate-700 text-sm mb-2 flex items-center">
+                                                                <i className="fa-solid fa-file-medical w-4 h-4 mr-2 text-blue-500"></i> Dữ liệu Text (EHR)
+                                                            </h3>
+                                                            <p className="text-sm text-slate-600 italic leading-relaxed">{selectedPatient.text}</p>
+                                                        </div>
+                                                        <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                                            <h3 className="font-bold text-slate-700 text-sm mb-2 flex items-center">
+                                                                <i className="fa-solid fa-x-ray w-4 h-4 mr-2 text-indigo-500"></i> Liên kết PACS (Hình ảnh)
+                                                            </h3>
+                                                            <p className="text-xs font-mono text-blue-600 bg-white p-2 border rounded">dicom://chest_xray_{selectedPatient.id}.dcm</p>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Right: AI Output & Decision */}
+                                                    <div className="space-y-4">
+                                                        <div className={`p-5 rounded-lg border-2 ${selectedPatient.severity > 0.5 ? 'bg-red-50 border-red-300' : 'bg-emerald-50 border-emerald-300'}`}>
+                                                            <div className="text-xs uppercase font-bold tracking-wider text-slate-500 mb-1">Dự Đoán Từ Không Gian Poincaré</div>
+                                                            <div className={`text-3xl font-bold ${selectedPatient.severity > 0.5 ? 'text-red-700' : 'text-emerald-700'}`}>
+                                                                {selectedPatient.target}
+                                                            </div>
+                                                            
+                                                            <div className="mt-5 space-y-2">
+                                                                <div className="flex justify-between text-xs text-slate-600 font-bold">
+                                                                    <span>Bán kính mức độ nghiêm trọng (r):</span>
+                                                                    <span className="font-mono">{selectedPatient.severity.toFixed(2)}</span>
+                                                                </div>
+                                                                <div className="w-full bg-white rounded-full h-3 border border-slate-200 overflow-hidden">
+                                                                    <div className={`h-full ${selectedPatient.severity > 0.5 ? 'bg-gradient-to-r from-orange-400 to-red-600' : 'bg-emerald-500'}`} style={{width: `${selectedPatient.severity*100}%`}}></div>
+                                                                </div>
+                                                                <div className="flex justify-between text-[10px] text-slate-400">
+                                                                    <span>Tâm (Khỏe mạnh)</span>
+                                                                    <span>Biên giới (Nghiêm trọng)</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 text-sm text-blue-800">
+                                                            <strong><i className="fa-solid fa-gears mr-1"></i> Dynamic Thresholding Active:</strong><br/>
+                                                            Hệ thống đã tự động điều chỉnh ngưỡng (threshold) của bệnh <b>{selectedPatient.target}</b> dựa trên đường cong Precision-Recall để tối đa hóa khả năng sàng lọc (Recall).
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <div className="h-full flex flex-col items-center justify-center text-slate-400 border-2 border-dashed rounded-xl">
+                                            <i className="fa-solid fa-hand-pointer text-4xl mb-3 text-slate-300"></i>
+                                            <p>Chọn một bệnh nhân từ Hàng đợi HIS để phân tích.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* --- TAB: RESEARCHER VIEW --- */}
+                        {activeTab === 'research' && (
+                            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col h-[75vh]">
+                                <div className="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 className="text-xl font-bold text-slate-800">Manifold Dataset Explorer (N = 100)</h2>
+                                        <p className="text-sm text-slate-500">Toàn bộ tọa độ đã được ánh xạ vào quả cầu Hyperbolic 3D.</p>
+                                    </div>
+                                    <div className="relative">
+                                        <i className="fa-solid fa-search absolute left-3 top-3 text-slate-400"></i>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Lọc theo ID hoặc Bệnh lý..." 
+                                            className="pl-10 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="overflow-auto rounded-lg border border-slate-200 flex-grow">
+                                    <table className="w-full text-left text-sm relative">
+                                        <thead className="bg-slate-100 text-slate-600 uppercase font-semibold text-xs sticky top-0 shadow-sm">
+                                            <tr>
+                                                <th className="p-4">Patient ID</th>
+                                                <th className="p-4 w-1/3">Dữ liệu Lâm sàng (EHR)</th>
+                                                <th className="p-4">Bệnh lý (Target)</th>
+                                                <th className="p-4">Độ nghiêm trọng (r)</th>
+                                                <th className="p-4">Tọa độ 3D Poincaré (x, y, z)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {filteredDataset.map(row => (
+                                                <tr key={row.id} className="hover:bg-blue-50 transition-colors">
+                                                    <td className="p-4 font-mono text-blue-600 font-bold">{row.id}</td>
+                                                    <td className="p-4 italic text-slate-600 truncate max-w-xs" title={row.text}>{row.text}</td>
+                                                    <td className="p-4">
+                                                        <span className={`px-2 py-1 rounded text-xs font-bold ${row.target === 'Normal' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
+                                                            {row.target}
+                                                        </span>
+                                                    </td>
+                                                    <td className="p-4">
+                                                        <div className="flex items-center space-x-2">
+                                                            <div className="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+                                                                <div className={`h-full ${row.severity > 0.5 ? 'bg-red-500' : 'bg-emerald-500'}`} style={{width: `${row.severity*100}%`}}></div>
+                                                            </div>
+                                                            <span className="text-xs font-mono">{row.severity.toFixed(2)}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-4 font-mono text-xs text-slate-500 bg-slate-50">[{row.x}, {row.y}, {row.z}]</td>
+                                                </tr>
+                                            ))}
+                                            {filteredDataset.length === 0 && (
+                                                <tr><td colSpan="5" className="p-8 text-center text-slate-400">Không tìm thấy bệnh nhân phù hợp.</td></tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* --- TAB: PATIENT VIEW --- */}
+                        {activeTab === 'patient' && (
+                            <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-sm border border-slate-200 animate-[fadeIn_0.5s_ease-out]">
+                                <div className="text-center mb-8 border-b pb-6">
+                                    <i className="fa-solid fa-notes-medical text-5xl text-blue-600 mb-4"></i>
+                                    <h2 className="text-2xl font-bold text-slate-800">Báo cáo Tầm soát Sức khỏe AI</h2>
+                                    <p className="text-slate-500 mt-2">Dành cho bệnh nhân: Giải thích kết quả chẩn đoán từ hệ thống trí tuệ nhân tạo.</p>
+                                </div>
+                                
+                                {!selectedPatient ? (
+                                    <div className="bg-amber-50 border border-amber-200 p-6 rounded-lg text-center text-amber-700">
+                                        <i className="fa-solid fa-circle-exclamation text-3xl mb-2"></i>
+                                        <p>Vui lòng yêu cầu bác sĩ chọn hồ sơ của bạn từ hệ thống HIS (Tab HIS Triage) để hiển thị báo cáo.</p>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-6">
+                                        <div className="flex items-center space-x-4 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                            <div className="bg-blue-100 p-3 rounded-full"><i className="fa-solid fa-user text-xl text-blue-600"></i></div>
+                                            <div className="flex-grow">
+                                                <div className="text-sm text-slate-500">Bệnh nhân</div>
+                                                <div className="font-bold text-lg">{selectedPatient.name}</div>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-sm text-slate-500">Mã hồ sơ</div>
+                                                <div className="font-mono font-bold text-blue-600">{selectedPatient.id}</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="p-6 rounded-xl border-2 shadow-sm bg-white">
+                                            <h3 className="font-bold text-lg mb-4 flex items-center border-b pb-2">
+                                                <i className="fa-solid fa-robot mr-2 text-slate-600"></i> Trí tuệ nhân tạo tìm thấy gì?
+                                            </h3>
+                                            {selectedPatient.severity > 0.5 ? (
+                                                <p className="text-slate-700 leading-relaxed text-lg">
+                                                    Hệ thống AI đa phương thức đã phân tích kỹ lưỡng ghi chú lâm sàng và hình ảnh X-quang của bạn. Hồ sơ của bạn được xếp vào <strong className="text-red-600 bg-red-50 px-2 py-1 rounded">nhóm cần ưu tiên kiểm tra</strong> liên quan đến các dấu hiệu của <strong>{selectedPatient.target}</strong>. <br/><br/>
+                                                    <span className="text-sm text-slate-500 italic">*Lưu ý: Đây là công cụ tầm soát, không phải kết luận cuối cùng. Bác sĩ chuyên khoa sẽ thảo luận các bước tiếp theo với bạn.</span>
+                                                </p>
+                                            ) : (
+                                                <p className="text-slate-700 leading-relaxed text-lg">
+                                                    Hệ thống AI đã phân tích hồ sơ của bạn. Tin tốt! Dữ liệu của bạn được ánh xạ vào <strong className="text-emerald-600 bg-emerald-50 px-2 py-1 rounded">vùng an toàn (khỏe mạnh)</strong>. Hệ thống không phát hiện các dấu hiệu bệnh lý nghiêm trọng nào.
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="bg-blue-50 border border-blue-200 p-5 rounded-lg text-sm text-blue-800">
+                                            <h4 className="font-bold mb-2"><i className="fa-solid fa-lightbulb text-yellow-500 mr-1"></i> Hệ thống hoạt động thế nào?</h4>
+                                            <p>AI sử dụng công nghệ "Hình học Hyperbolic" (tưởng tượng như một quả cầu 3D khổng lồ) để sắp xếp các căn bệnh. Kết quả khỏe mạnh sẽ nằm an toàn ở <b>Tâm quả cầu</b>, trong khi các triệu chứng bệnh sẽ bị đẩy ra <b>Rìa quả cầu</b>. Điểm số khoảng cách của bạn là <strong className="font-mono text-lg">{selectedPatient.severity.toFixed(2)}</strong> (0 là Tâm, 1.0 là Rìa).</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
