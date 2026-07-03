@@ -1,0 +1,122 @@
+patient_id,text_profile,dominant_pathology,severity,poincare_x,poincare_y,poincare_z
+PT_00000,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092190295,0.00015559979,-0.0027334206
+PT_00001,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09213978,0.0001983894,-0.002515344
+PT_00002,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11470741,0.03866513,-0.011659717
+PT_00003,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09200579,-0.00020522624,-0.002573844
+PT_00004,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092482805,0.0002425462,-0.0026993454
+PT_00005,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.0924568,5.2056275e-05,-0.002604032
+PT_00006,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092198655,0.00018385332,-0.0023620054
+PT_00007,EHR Record: Active evidence of: nodule. Severity metric: 0.50.,nodule,0.5,-0.13522078,0.034552585,-0.08197074
+PT_00008,EHR Record: Active evidence of: fibrosis. Severity metric: 0.50.,fibrosis,0.5,-0.1255878,0.018045153,-0.037436426
+PT_00009,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09213047,0.00017909613,-0.0026439019
+PT_00010,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09193961,0.0003692573,-0.0027980953
+PT_00011,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092265144,0.000109213404,-0.0028809384
+PT_00012,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09196825,-8.6807646e-05,-0.0026381854
+PT_00013,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09218699,-0.00020739809,-0.002745159
+PT_00014,"EHR Record: Active evidence of: cardiomegaly, effusion. Severity metric: 0.65.",cardiomegaly,0.6499999999999999,-0.099900045,-0.07420261,-0.009542493
+PT_00015,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09208909,-0.00010057539,-0.0029021148
+PT_00016,"EHR Record: Active evidence of: atelectasis, infiltration, emphysema. Severity metric: 0.80.",atelectasis,0.7999999999999999,-0.10973734,-0.080332704,0.00039155036
+PT_00017,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11486064,0.038537998,-0.01155217
+PT_00018,EHR Record: Active evidence of: hernia. Severity metric: 0.50.,hernia,0.5,-0.12834632,0.079954244,-0.06516223
+PT_00019,"EHR Record: Active evidence of: atelectasis, infiltration. Severity metric: 0.65.",atelectasis,0.6499999999999999,-0.1064715,-0.07080054,0.022486605
+PT_00020,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09191492,-1.9549392e-05,-0.0025758464
+PT_00021,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092311606,0.00018066727,-0.002858214
+PT_00022,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09199381,0.00016530044,-0.0028786138
+PT_00023,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09223384,7.283501e-05,-0.0027671903
+PT_00024,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092307374,0.00017422438,-0.0026938207
+PT_00025,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09225288,-7.8265555e-05,-0.002571892
+PT_00026,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09206307,0.00013495516,-0.0025439896
+PT_00027,EHR Record: Active evidence of: effusion. Severity metric: 0.50.,effusion,0.5,-0.08703529,0.06296045,0.06214466
+PT_00028,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09229466,0.00019710977,-0.0026480556
+PT_00029,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09221786,-6.303843e-05,-0.0025977679
+PT_00030,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.091734484,7.710606e-05,-0.0025946256
+PT_00031,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09218596,0.00012121536,-0.002684757
+PT_00032,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092264846,0.00018003955,-0.0026254784
+PT_00033,EHR Record: Active evidence of: atelectasis. Severity metric: 0.50.,atelectasis,0.5,-0.09087977,0.019991476,0.05371911
+PT_00034,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09198403,5.6041405e-05,-0.0023677498
+PT_00035,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09195399,0.00016699266,-0.002729658
+PT_00036,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09199801,3.4585595e-05,-0.00274954
+PT_00037,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09220964,0.00011413824,-0.0024708882
+PT_00038,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09196928,-7.315818e-05,-0.002561584
+PT_00039,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09225559,7.216167e-05,-0.0026045702
+PT_00040,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09214419,-0.0001288047,-0.0028094668
+PT_00041,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09188068,-0.00017303042,-0.0026702415
+PT_00042,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09209478,3.098324e-05,-0.002658274
+PT_00043,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092083156,0.00020521041,-0.0026709978
+PT_00044,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092342675,4.725624e-05,-0.0027416684
+PT_00045,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09198041,0.00021607056,-0.002627086
+PT_00046,"EHR Record: Active evidence of: atelectasis, infiltration. Severity metric: 0.65.",atelectasis,0.6499999999999999,-0.106519185,-0.07082988,0.022543311
+PT_00047,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092061475,5.834084e-05,-0.0027450733
+PT_00048,EHR Record: Active evidence of: effusion. Severity metric: 0.50.,effusion,0.5,-0.08702118,0.06305202,0.0619717
+PT_00049,EHR Record: Active evidence of: fibrosis. Severity metric: 0.50.,fibrosis,0.5,-0.12555502,0.018199183,-0.03740987
+PT_00050,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09209487,0.00013211928,-0.0027444102
+PT_00051,"EHR Record: Active evidence of: effusion, infiltration. Severity metric: 0.65.",effusion,0.6499999999999999,-0.10929112,-0.036300484,0.02265272
+PT_00052,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.114896044,0.03876037,-0.011683181
+PT_00053,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11485152,0.038643386,-0.011664268
+PT_00054,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11470552,0.0385894,-0.011606131
+PT_00055,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11479974,0.038699895,-0.011576995
+PT_00056,"EHR Record: Active evidence of: infiltration, fibrosis. Severity metric: 0.65.",infiltration,0.6499999999999999,-0.13766314,-0.073706046,-0.04751012
+PT_00057,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092247576,0.00016079191,-0.0022620894
+PT_00058,"EHR Record: Active evidence of: mass, pleural. Severity metric: 0.65.",mass,0.6499999999999999,-0.111252606,-0.022538122,-0.009473383
+PT_00059,EHR Record: Active evidence of: mass. Severity metric: 0.50.,mass,0.5,-0.103543356,0.070780985,-0.07069437
+PT_00060,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09198278,-0.00010010041,-0.0027031712
+PT_00061,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092169404,-0.000112191774,-0.002806019
+PT_00062,EHR Record: Active evidence of: fibrosis. Severity metric: 0.50.,fibrosis,0.5,-0.12559518,0.018053822,-0.037340097
+PT_00063,"EHR Record: Active evidence of: atelectasis, pneumothorax, emphysema. Severity metric: 0.80.",atelectasis,0.7999999999999999,-0.09382418,-0.09076294,0.029563408
+PT_00064,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092000395,0.0002035927,-0.0026599988
+PT_00065,"EHR Record: Active evidence of: atelectasis, effusion, infiltration. Severity metric: 0.80.",atelectasis,0.7999999999999999,-0.10510028,-0.05580908,0.028108705
+PT_00066,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09201698,0.0001954129,-0.0025667027
+PT_00067,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09210837,1.0437332e-05,-0.002662398
+PT_00068,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11473196,0.03873268,-0.011686072
+PT_00069,EHR Record: Active evidence of: nodule. Severity metric: 0.50.,nodule,0.5,-0.13528612,0.03427521,-0.08196308
+PT_00070,EHR Record: Active evidence of: effusion. Severity metric: 0.50.,effusion,0.5,-0.08696784,0.06302408,0.062017992
+PT_00071,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09191294,4.969351e-05,-0.002606947
+PT_00072,EHR Record: Active evidence of: effusion. Severity metric: 0.50.,effusion,0.5,-0.08698252,0.06312125,0.06201034
+PT_00073,EHR Record: Active evidence of: consolidation. Severity metric: 0.50.,consolidation,0.5,-0.07741744,0.040593635,0.01265984
+PT_00074,EHR Record: Active evidence of: fibrosis. Severity metric: 0.50.,fibrosis,0.5,-0.12562843,0.01811127,-0.037441462
+PT_00075,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092153996,-3.7231483e-05,-0.0027506743
+PT_00076,"EHR Record: Active evidence of: infiltration, nodule. Severity metric: 0.65.",infiltration,0.6499999999999999,-0.13452949,-0.059611604,-0.065981194
+PT_00077,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09219031,6.639771e-05,-0.0025639571
+PT_00078,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.0922398,-0.00020366162,-0.0026902184
+PT_00079,EHR Record: Active evidence of: atelectasis. Severity metric: 0.50.,atelectasis,0.5,-0.09067722,0.019961126,0.05367335
+PT_00080,"EHR Record: Active evidence of: infiltration, edema. Severity metric: 0.65.",infiltration,0.6499999999999999,-0.123760946,-0.036495723,-0.041772738
+PT_00081,"EHR Record: Active evidence of: atelectasis, effusion, infiltration. Severity metric: 0.80.",atelectasis,0.7999999999999999,-0.10502455,-0.05582127,0.02806219
+PT_00082,EHR Record: Active evidence of: emphysema. Severity metric: 0.50.,emphysema,0.5,-0.11296504,0.05036605,-0.0042742956
+PT_00083,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09234986,0.00029080175,-0.0026528407
+PT_00084,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09224589,-2.089329e-05,-0.0028062947
+PT_00085,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092409104,-4.8336573e-05,-0.0025204588
+PT_00086,"EHR Record: Active evidence of: effusion, pneumothorax. Severity metric: 0.65.",effusion,0.6499999999999999,-0.07989362,-0.036763553,0.06247378
+PT_00087,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09225674,0.00023327675,-0.0025909748
+PT_00088,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092159584,-2.7158298e-05,-0.0025711209
+PT_00089,EHR Record: Active evidence of: atelectasis. Severity metric: 0.50.,atelectasis,0.5,-0.090761974,0.019894302,0.053809524
+PT_00090,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09205285,0.0003014058,-0.0025271922
+PT_00091,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09224193,-6.355625e-05,-0.0025778674
+PT_00092,EHR Record: Active evidence of: nodule. Severity metric: 0.50.,nodule,0.5,-0.13523449,0.03441985,-0.08201848
+PT_00093,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092141,-0.00018208567,-0.002732262
+PT_00094,EHR Record: Active evidence of: cardiomegaly. Severity metric: 0.50.,cardiomegaly,0.5,-0.1115995,0.023663856,-0.055956952
+PT_00095,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09201695,-0.00011130702,-0.0028107017
+PT_00096,EHR Record: Active evidence of: atelectasis. Severity metric: 0.50.,atelectasis,0.5,-0.09079802,0.019935038,0.05369726
+PT_00097,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092175156,0.00013841875,-0.0026547275
+PT_00098,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.0918991,0.00020509306,-0.0026403107
+PT_00099,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09212084,-0.0002481658,-0.002749443
+PT_00100,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09223682,9.366684e-05,-0.0025260001
+PT_00101,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09204143,-2.6866794e-05,-0.0029235967
+PT_00102,EHR Record: Active evidence of: pneumothorax. Severity metric: 0.50.,pneumothorax,0.5,-0.082632214,0.06900931,0.07283505
+PT_00103,"EHR Record: Active evidence of: mass, pleural. Severity metric: 0.65.",mass,0.6499999999999999,-0.1112059,-0.022574257,-0.009487808
+PT_00104,"EHR Record: Active evidence of: nodule, pleural. Severity metric: 0.65.",nodule,0.6499999999999999,-0.12523875,-0.04968243,-0.034517817
+PT_00105,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09210837,-1.3097189e-05,-0.002689898
+PT_00106,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09183933,-5.0856732e-05,-0.0025876723
+PT_00107,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09201117,-1.2677163e-05,-0.0024379157
+PT_00108,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09210493,-1.785066e-05,-0.0027023628
+PT_00109,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.11483122,0.038720302,-0.011654891
+PT_00110,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09210175,3.6909245e-05,-0.0026783757
+PT_00111,"EHR Record: Active evidence of: pneumothorax, emphysema. Severity metric: 0.65.",pneumothorax,0.6499999999999999,-0.09679837,-0.060035378,0.033125155
+PT_00112,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09222132,-1.2721866e-05,-0.0024269558
+PT_00113,EHR Record: Active evidence of: nodule. Severity metric: 0.50.,nodule,0.5,-0.1352133,0.034486283,-0.08203325
+PT_00114,EHR Record: Active evidence of: atelectasis. Severity metric: 0.50.,atelectasis,0.5,-0.09081185,0.02005985,0.05373905
+PT_00115,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.09199482,-9.9707395e-06,-0.0027729087
+PT_00116,EHR Record: Active evidence of: consolidation. Severity metric: 0.50.,consolidation,0.5,-0.07750386,0.040659357,0.012491602
+PT_00117,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092197224,0.000112622045,-0.002875287
+PT_00118,EHR Record: Normal chest radiograph findings. Clear lungs. Severity metric: 0.10.,Normal,0.1,0.092043504,0.00010932889,-0.0027272515
+PT_00119,EHR Record: Active evidence of: infiltration. Severity metric: 0.50.,infiltration,0.5,-0.114636704,0.038740456,-0.011544842
+PT_00120,EHR Record: Active evidence of: effusion. Severity metric: 0.50.,effusion,0.5,-0.08707784,0.06314845,0.062003054
