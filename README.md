@@ -64,11 +64,11 @@ _Outputs (Loss curves, 3D Manifold projections, and full_dataset_manifold.csv) w
 
 If you find this code or methodology useful in your research, please consider citing our work:
 
-@article{poincare_ehr_fusion_2024,  
-title={Poincaré Multimodal EHR Fusion: Non-Euclidean Representation Learning for Hierarchical Clinical Diagnostics},  
-author={Lead Researcher and Clinical Data Team},  
-journal={Target: IEEE JBHI / MICCAI},  
-year={2024}  
+@article{,  
+title={},  
+author={},  
+journal={},  
+year={}  
 }
 
 ## 🤝 Contributing
