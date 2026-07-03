@@ -20,7 +20,7 @@ Our solution leverages **Hyperbolic Geometry (the Poincaré Ball model)** to exp
 
 We bridge the gap between theoretical geometry and clinical application with a standalone, client-side Web Application designed for modern Hospital Information Systems (HIS).
 
-👉 [**Launch Live Interactive Demo**](#403zek6rzidg) _(Replace with your GitHub Pages link: https://\[username\].github.io/\[repo\]/)_
+👉 [**Launch Live Interactive Demo**](#403zek6rzidg) _(Replace with your GitHub Pages link: https://anonymous.4open.science/w/poincare-his-demo-97CB/)_
 
 The dashboard includes three distinct views:
 
